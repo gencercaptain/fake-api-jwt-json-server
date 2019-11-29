@@ -2,7 +2,7 @@
 
 A Fake REST API using json-server with JWT authentication. 
 
-Implemented End-points: login,register
+Implemented End-points: login,register, products, categories, basket
 
 ## Install
 
@@ -38,6 +38,8 @@ You should receive an access token with the following format
 ```
 {
    "access_token": "<ACCESS_TOKEN>"
+   "token_type": "Bearer",
+   "epired_on": timespan
 }
 ```
 
