@@ -13,7 +13,7 @@ server.use(jsonServer.defaults());
 
 const SECRET_KEY = '123456789'
 
-const expiresIn = '1h'
+const expiresIn = 3600
 
 // Create a token from a payload 
 function createToken(payload){
@@ -72,7 +72,12 @@ fs.readFile("./users.json", (err, data) => {
 // Create token for new user
   const access_token = createToken({email, password})
   console.log("Access Token:" + access_token);
-  res.status(200).json({access_token})
+  var decoded = jwt.decode(access_token, {complete: true});
+  console.log(decoded.header);
+  console.log(decoded.payload);
+  var token_type = "Bearer";
+  var expires_on = decoded.payload.exp;
+  res.status(200).json({access_token, token_type, expires_on})
 })
 
 // Login to one of the users from ./users.json
@@ -88,7 +93,14 @@ server.post('/auth/login', (req, res) => {
   }
   const access_token = createToken({email, password})
   console.log("Access Token:" + access_token);
-  res.status(200).json({access_token})
+  var decoded = jwt.decode(access_token, {complete: true});
+  console.log(decoded.header);
+  console.log(decoded.payload);
+  var token_type = "Bearer";
+  var expires_on = decoded.payload.exp;
+  var date = Date.parse(expires_on);
+  console.log(date);  
+  res.status(200).json({access_token, token_type, expires_on})
 })
 
 server.use(/^(?!\/auth).*$/,  (req, res, next) => {
