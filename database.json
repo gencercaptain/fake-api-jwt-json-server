@@ -966,12 +966,5 @@
       "discontinued": false,
       "name": "Original Frankfurter grüne Soße"
     }
-  ],
-  "basket": [
-    {
-      "userId": 1,
-      "productID":1,
-      "quantity": 2
-    }
-  ]
+  ]  
 }
